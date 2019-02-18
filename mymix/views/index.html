@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>data incubator project</title>
+    <link id="favicon" rel="icon" href="https://gomix.com/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://sp-bootstrap.global.ssl.fastly.net/8.0.0/sp-bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/style.css">
+    <script src="/public/post.js"></script>
+    
+  </head>
+  <body>
+    <header>
+      <h1>
+        Cover version analysis
+      </h1>
+    </header>
+
+    <main>
+
+      <p>Search for tracks on Spotify:</p>
+      <form>
+        <input  name="song" required type="text" maxlength="100" placeholder="search for a song">
+        <input  name="artist" required type="text" placeholder="the artist names">
+        <button type="submit">Submit</button>
+      </form>
+      <section class="results">
+        <h3>results from spotify database</h3>
+        <ul id="results"></ul>
+      </section>
+      <section class="no results">
+          <h3>other cover versions on AZLyrics</h3>
+          <ul id="no results"></ul>
+        </section>
+    </main>
+    
+    <script>
+      let stories = {{data|tojson}};
+      
+      renderStories(stories);
+      
+    </script>
+    
+
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="/public/client.js"></script>
+    
+    
+  
+
+
+  </body>
+</html>
+
+

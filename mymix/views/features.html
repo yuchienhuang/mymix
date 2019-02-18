@@ -1,0 +1,24 @@
+<html>
+<body>
+<h3>Version:</h3>{{track_features.artist_names}}
+<h3>Features:</h3>{{
+    
+    track_features.spotify_features[1:-2].replace(',','<br/>').replace('\'','')|safe
+    
+    
+    }}
+
+
+<h3><a href={{track_features.web}} target="_blank">Link to the Track</a></h3>
+
+
+
+
+
+
+<a href="javascript:history.back()">Go Back to the Search Results</a>
+
+
+
+</body>
+</html>
