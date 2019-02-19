@@ -1,0 +1,68 @@
+<html>
+   <head>
+      <title>data incubator project</title>
+      <link id="favicon" rel="icon" href="https://gomix.com/favicon-app.ico" type="image/x-icon">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://sp-bootstrap.global.ssl.fastly.net/8.0.0/sp-bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="/public/style.css">
+      <link href="https://fonts.googleapis.com/css?family=Gloria Hallelujah|Satisfy|Annie Use Your Telescope" rel="stylesheet">
+      <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+      <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+      <script src="/public/render.js"></script>
+      
+   </head>
+   <body>
+         <h2>
+               Cover version analysis
+             </h2>
+           </header>
+       
+            <ul class="nav" id="nav-item-container">
+               
+       
+             </ul>
+       
+       
+           <script>
+           
+           renderNavbar();</script>
+   
+           <p style="font-family:Gloria Hallelujah">Upload <span style="color:#e98c9c">two  22050Hz mono or stereo audio files (.wav)</span> of different cover versions you would like to compare, and see thier correspondence by comparing their chromagrams!</p>
+      <form action = "/audio_analysis/uploader" method = "POST" enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <input type = "submit"/>
+      </form>
+
+
+      
+            <h3>Generate Plots:</h3>
+                <form>
+                    <a href=# id=test><button class='home'>Run!</button></a>
+                </form>
+        
+      
+
+ <div id='plot'>
+
+   <div id="box">
+      <div class="row" id="plot">
+  
+              
+  
+  
+      </div>
+  </div>
+  
+
+
+ </div>
+
+
+      <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+      integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+      crossorigin="anonymous"></script>        
+      <script src="/public/audioanalysis.js"></script>
+   </body>
+</html>

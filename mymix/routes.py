@@ -1,9 +1,21 @@
-from flask import request, render_template
+from flask import request, render_template, redirect, url_for
+from werkzeug import secure_filename
 import json
 from mymix import app, db
 from mymix.models import Spotify_Artists, AZLyrics_Artists
 from mymix.azlyrics import *
 from mymix.utils import *
+from mymix.audioAnalysis import *
+
+
+
+
+ALLOWED_EXTENSIONS = set(['wav'])
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route('/')
@@ -33,7 +45,15 @@ def homepage():
         
 
     return render_template('index.html', data=data)
-  
+
+
+
+
+@app.route('/best_cover_versions')
+def bestcovers():
+    return render_template('bestcovers.html')
+
+
 @app.route('/search', methods=['GET'])
 def search():
     
@@ -100,22 +120,7 @@ def search():
     return return_string
     #return json.dumps(no_spotify_versions)
     #return json.dumps([{key: tracks_features[key][0] for key in tracks_keys}, no_spotify_versions])
-    #get_audio_lyrics(tracks)
-    
-    
-    
-    # Send request to the Spotify API
-    #new_releases = sp.new_releases(country=country, limit=20, offset=0)
-    # Return the list of new releases
 
-
-# @app.route("/register", methods=['GET', 'POST'])
-# def register():
-#     form = RegistrationForm()
-#     if form.validate_on_submit():
-#         flash(f'Account created for {form.username.data}!', 'success')
-#         return redirect(url_for('home'))
-#     return render_template('register.html', title='Register', form=form)
 
 @app.route("/features/<string:id>", methods=['GET', 'POST'])
 def track_features(id):
@@ -127,7 +132,40 @@ def track_features(id):
 
     return render_template('features.html', track_features = track_features)
 
+@app.route('/audio_analysis/uploader', methods = ['GET', 'POST'])
+def upload_file():
+#    if request.method == 'POST':
+#       f = request.files['file']
+#       f.save(secure_filename(f.filename))
+#       return 'file uploaded successfully'
 
-# @app.teardown_request
-# def teardown_request(exception):
-#         db.drop_all()
+    # check if the post request has the file part
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    # if user does not select file, browser also
+    # submit a empty part without filename
+    if file.filename == '':
+        flash('No selected file')
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        
+        file.save(os.path.join(app.root_path, 'public/uploaded_audio_files', filename))
+        return redirect(url_for('audioanalysis'))
+        #return 'the first file uploaded successfully'
+
+
+@app.route('/background_process_test', methods = ['GET', 'POST'])
+def background_process_test():
+    generate_plots()
+    
+    return render_template('audioanalysis.html')
+
+@app.route('/audio_analysis')
+def audioanalysis():
+    return render_template('audioanalysis.html')
+
+
+

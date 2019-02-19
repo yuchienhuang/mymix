@@ -16,6 +16,9 @@ $(function() {
       $('input[type="text"]').val('');
       $('input').focus();
       
+      if(sessionStorage.length ==0){sessionStorage.setItem("have searched?", "Yes")}
+      
+
       if(string==""){
 
         location.reload();

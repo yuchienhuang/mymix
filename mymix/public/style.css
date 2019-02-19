@@ -1,21 +1,20 @@
-/* styles */
-/* called by your view template */
 
-/* You might want to try something fancier: */
-/* less: http://lesscss.org/ */
 
-* {
+
+
+/* * {
   box-sizing: border-box;
-}
+}  */
 
 body {
   font-family: helvetica, arial, sans-serif;
   margin: 25px;
 }
 
-h1 {
+
+h3 {
   font-weight: bold;
-  color: pink;
+  font-family:  'Annie Use Your Telescope';
 }
 
 .bold {
@@ -26,17 +25,17 @@ p {
   max-width: 600px;
 }
 
-form {
+form.home {
   margin-bottom: 25px;
   padding: 15px;
-  background-color: cyan;
+  background-color: pink;
   display: inline-block;
   width: 100%;
   max-width: 340px;
   border-radius: 3px;
 }
 
-input {
+input.home {
   display: block;
   margin-bottom: 10px;
   padding: 5px;
@@ -51,17 +50,18 @@ input[type="radio"] {
   width: auto;
 }
 
-button {
+button.home {
   font-size: 16px;
   border-radius: 3px;
   background-color: lightgrey;
+  color: black;
   border: 1px solid grey;
-  box-shadow: 2px 2px teal;
+  box-shadow: 2px 2px ;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: yellow;
+  background-color: palevioletred;
 }
 
 button:active {
@@ -85,3 +85,31 @@ footer > a {
 .nicejob {
   text-decoration: line-through;
 }
+
+
+
+ul.nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li.nav {
+  float: left;
+}
+
+li.nav a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li.nav a:hover {
+  background-color: #111;
+}
+
+

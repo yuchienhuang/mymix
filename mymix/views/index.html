@@ -8,38 +8,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://sp-bootstrap.global.ssl.fastly.net/8.0.0/sp-bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/public/style.css">
-    <script src="/public/post.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Gloria Hallelujah|Satisfy|Annie Use Your Telescope" rel="stylesheet">
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <script src="/public/render.js"></script>
     
   </head>
   <body>
     <header>
-      <h1>
+      <h2>
         Cover version analysis
-      </h1>
+      </h2>
     </header>
+
+     <ul class="nav" id="nav-item-container">
+        
+
+      </ul>
+
+    <script>
+    
+    renderNavbar();</script>
 
     <main>
 
-      <p>Search for tracks on Spotify:</p>
-      <form>
-        <input  name="song" required type="text" maxlength="100" placeholder="search for a song">
-        <input  name="artist" required type="text" placeholder="the artist names">
-        <button type="submit">Submit</button>
+      <p style="font-family:Gloria Hallelujah">Search for tracks on Spotify:</p>
+      <form class="home">
+        <input class="home"  name="song" required type="text" maxlength="100" placeholder="search for a song">
+        <input class="home"  name="artist" required type="text" placeholder="the artist names">
+        <button class="home" type="submit">Submit</button>
       </form>
       <section class="results">
-        <h3>results from spotify database</h3>
+          
+        <h3 style="font-family:Annie Use Your Telescope" >results from spotify database:</h3>
         <ul id="results"></ul>
       </section>
       <section class="no results">
-          <h3>other cover versions on AZLyrics</h3>
+          <h3>other cover versions on AZLyrics:</h3>
           <ul id="no results"></ul>
         </section>
     </main>
     
+    
     <script>
+      console.log()
+      
+      if (sessionStorage.length != 0){
       let stories = {{data|tojson}};
       
-      renderStories(stories);
+      renderStories(stories);}
       
     </script>
     
