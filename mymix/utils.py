@@ -1,7 +1,7 @@
 import numpy as np
 import os
 import json
-#from mymix import display_utils,azlyrics
+
 
 # Spotify API wrapper, documentation here: http://spotipy.readthedocs.io/en/latest/
 import spotipy
@@ -22,60 +22,17 @@ def search_tracks(query):
     the audio features/analysis of it
     :param spotify: An basic-authenticated spotipy client
     """
-    #keep_searching = True
+    
     selected_track = None
 
-    # Initialize Spotipy
-    #spotify = authenticate_client()
-
-    # We want to make sure the search is correct
-    # while keep_searching:
     search_term = query
 
-        # Search spotify
+        
     results = spotify.search(search_term)
     tracks = results.get('tracks', {}).get('items', [])
     return tracks
 
-        # if len(tracks) == 0:
-        #     print_header('No results found for "{}"'.format(search_term))
-        # else:
-        #     # Print the tracks
-        #     print_header('Search results for "{}"'.format(search_term))
-        #     for i, track in enumerate(tracks):
-        #         print('  {}) {}'.format(i + 1, track_string(track)))
-
-        # Prompt the user for a track number, "s", or "c"
-        # track_choice = input('\nChoose a track #, "s" to search again, or "c" to cancel: ')
-        # try:
-        #     # Convert the input into an int and set the selected track
-        #     track_index = int(track_choice) - 1
-        #     selected_track = tracks[track_index]
-        #     keep_searching = False
-        # except (ValueError, IndexError):
-        #     # We didn't get a number.  If the user didn't say 'retry', then exit.
-        #     if track_choice != 's':
-        #         # Either invalid input or cancel
-        #         if track_choice != 'c':
-        #             print('Error: Invalid input.')
-        #         keep_searching = False
-
-    # Quit if we don't have a selected track
-    # if selected_track is None:
-    #     return
-
-    # Request the features for this track from the spotify API
-    # get_audio_features(spotify, [selected_track])
-
-    # return [selected_track]
-
-
-# def get_audio_lyrics(tracks):
-#     track_artists = [track_string(track).split('-') for track in tracks]
-
-#     print([get_lyrics(track_artist[-1],track_artist[0]) for track_artist in track_artists])
-
-#     return json.dumps([get_lyrics(track_artist[-1],track_artist[0]) for track_artist in track_artists])
+    
 
 
 def get_audio_features( tracks, tracks_artistnames):
@@ -88,11 +45,11 @@ def get_audio_features( tracks, tracks_artistnames):
         print('No tracks provided.')
         return
 
-    # Build a map of id->track so we can get the full track info later
+    
     track_map = {track.get('id'): track for track in tracks}
 
     # Request the audio features for the chosen tracks (limited to 50)
-    #print_header('Getting Audio Features...')
+    
     tracks_features_response = spotify.audio_features(tracks=track_map.keys())
 
     desired_features = [
@@ -131,13 +88,7 @@ def get_audio_features( tracks, tracks_artistnames):
     tracks_features_map = {f.get('id'): [tracks_artistnames[i], tracks_features_list[i], "https://open.spotify.com/track/" + f.get('id')] for i, f in enumerate(tracks_features_response)}
 
     
-    # Iterate through the features and print the track and info
-    # if pretty_print:
-    #     for track_id, track_features in track_features_map.items():
-    #         # Print out the track info and audio features
-    #         track = track_map.get(track_id)
-    #         print_audio_features_for_track(track, track_features)
-
+    
     
     
     
