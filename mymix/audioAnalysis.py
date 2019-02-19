@@ -10,6 +10,17 @@ import scipy.signal
 
     
 def generate_plots():
+
+    path1 = os.path.join(app.root_path, 'public/generated_plots', 'plot1.png')
+    path2 = os.path.join(app.root_path, 'public/generated_plots', 'plot2.png')
+    path3 = os.path.join(app.root_path, 'public/generated_plots', 'optimal_path.png')
+    try:
+        os.remove(path1)
+        os.remove(path2)
+        os.remove(path3)
+    except:
+        pass
+
     fs = 22050.
 
     snd = []
@@ -18,6 +29,9 @@ def generate_plots():
 
     fft_len = 4096
     hop_size = fft_len // 4
+
+    if len(snd) != 2:
+        return ""
 
     chroma_x = make_chromagram(snd[0], fs, fft_len, hop_size, normalize=False)
     chroma_x = cens(chroma_x, 11, 4)
@@ -51,6 +65,14 @@ def generate_plots():
     plt.plot(path[:,1], path[:,0], '-r', linewidth=3)
 
     plt.savefig(os.path.join(app.root_path, 'public/generated_plots/optimal_path'))
+
+    path1 = os.path.join(app.root_path, 'public/uploaded_audio_files', 'audio_file_1.wav')
+    path2 = os.path.join(app.root_path, 'public/uploaded_audio_files', 'audio_file_2.wav')
+
+    os.remove(path1)
+    os.remove(path2)
+
+    return "success"
 
 
 def load_wav(filepath, t_start = 0, t_end = sys.maxsize, only_22k = True) :

@@ -1,5 +1,5 @@
-from flask import request, render_template, redirect, url_for
-from werkzeug import secure_filename
+from flask import request, render_template, redirect, url_for, flash
+#from werkzeug import secure_filename
 import json
 from mymix import app, db
 from mymix.models import Spotify_Artists, AZLyrics_Artists
@@ -141,27 +141,37 @@ def upload_file():
 
     # check if the post request has the file part
     if 'file' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
+        
+        return render_template('audioanalysis.html')
     file = request.files['file']
     # if user does not select file, browser also
     # submit a empty part without filename
     if file.filename == '':
-        flash('No selected file')
-        return redirect(request.url)
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
         
-        file.save(os.path.join(app.root_path, 'public/uploaded_audio_files', filename))
-        return redirect(url_for('audioanalysis'))
-        #return 'the first file uploaded successfully'
+        return render_template('audioanalysis.html')
+    if file and allowed_file(file.filename):
+        #filename = secure_filename(file.filename)
+        path1 = os.path.join(app.root_path, 'public/uploaded_audio_files', 'audio_file_1.wav')
+        path2 = os.path.join(app.root_path, 'public/uploaded_audio_files', 'audio_file_2.wav')
+
+        if os.path.exists(path1) and os.path.exists(path2):
+            os.remove(path2)
+            file.save(path1)
+        elif not os.path.exists(path1) and not os.path.exists(path2):
+            file.save(path1)
+        else:
+            file.save(path2)
+            
+
+        return render_template('audioanalysis.html')
+        #return 'the file uploaded successfully'
 
 
 @app.route('/background_process_test', methods = ['GET', 'POST'])
 def background_process_test():
-    generate_plots()
+    return_string = generate_plots()
     
-    return render_template('audioanalysis.html')
+    return return_string
 
 @app.route('/audio_analysis')
 def audioanalysis():

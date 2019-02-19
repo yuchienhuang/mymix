@@ -31,8 +31,9 @@
    
            <p style="font-family:Gloria Hallelujah">Upload <span style="color:#e98c9c">two  22050Hz mono or stereo audio files (.wav)</span> of different cover versions you would like to compare, and see thier correspondence by comparing their chromagrams!</p>
       <form action = "/audio_analysis/uploader" method = "POST" enctype = "multipart/form-data">
+         
          <input type = "file" name = "file" />
-         <input type = "submit"/>
+         <input type = "submit" name="upload" value="upload"/>
       </form>
 
 

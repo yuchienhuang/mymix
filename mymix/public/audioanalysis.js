@@ -6,20 +6,23 @@ $(function() {
       while (plotDiv.firstChild) {
         plotDiv.removeChild(plotDiv.firstChild);
       }
-      plotDiv.innerText = "generating the results...";
+      
+     
+        plotDiv.innerText = "generating the results...";
 
-      $.get('/background_process_test',
-          function(data) {
-            while (plotDiv.firstChild) {
-              plotDiv.removeChild(plotDiv.firstChild);
-            }     
-            
-            plotDiv.appendChild( imageItem("/public/generated_plots/plot1.png"));
-            plotDiv.appendChild( imageItem("/public/generated_plots/plot2.png"));
-            plotDiv.appendChild( imageItem("/public/generated_plots/optimal_path.png"));
-            
-            
-      });
+        $.get('/background_process_test',
+            function(string) {
+              while (plotDiv.firstChild) {
+                plotDiv.removeChild(plotDiv.firstChild);
+              }     
+            if(string=="success") {
+              plotDiv.appendChild( imageItem("/public/generated_plots/plot1.png"));
+              plotDiv.appendChild( imageItem("/public/generated_plots/plot2.png"));
+              plotDiv.appendChild( imageItem("/public/generated_plots/optimal_path.png"));
+            }else{plotDiv.innerText = "Please upload TWO files!";}
+              
+        });
+     
       return false;
     });
   });
