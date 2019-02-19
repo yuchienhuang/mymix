@@ -1,4 +1,8 @@
-Flask
+flask
 gunicorn
 requests
 spotipy
+flask_sqlalchemy
+urllib3
+bs4
+matplotlib
