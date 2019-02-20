@@ -65,7 +65,7 @@ function newNavbarItem(text, url) {
   itemNav.className = 'nav';
   itemNav.appendChild(itemLink);
 
-  console.log(itemNav)
+  
   return itemNav
 }
 

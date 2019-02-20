@@ -16,11 +16,24 @@ def strip_off_punc(string):
     
     return no_punct
 
+def remove_the(string):
+    if string.lower().startswith("the"):  
+        return string[3:].strip()
+    else:
+        return string
 
 def all_versions(track_name,track_artistname):
+
+    
+    track_name = remove_the(track_name)
+    track_artistname = remove_the(track_artistname)
+
+
     
     original_artistname = original_artist(track_artistname,track_name)
-        
+    
+    
+
     if original_artistname:
         track_artistname =   original_artistname
 
@@ -60,11 +73,19 @@ def all_versions(track_name,track_artistname):
                 text.append(b.text.strip().lower())
         
     try:
-            
+        matched_label=[]
         data = np.array(text).reshape((-1,2))
-        matched_label = data[:,0] == track_name.lower()
+        
+        for i, d in enumerate(data[:,0]):
+            
+            if remove_the(d) == track_name.lower():
+            
+                matched_label.append(i)
+        
+
         matched_data = data[matched_label]
         artistnames = set(matched_data[:,1])
+
         return artistnames
     except:
         return {}

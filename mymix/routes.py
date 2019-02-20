@@ -4,7 +4,7 @@ import json
 from mymix import app, db
 from mymix.models import Spotify_Artists, AZLyrics_Artists
 from mymix.azlyrics import *
-from mymix.utils import *
+from mymix.spotify import *
 from mymix.audioAnalysis import *
 
 
